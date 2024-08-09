@@ -1,0 +1,17 @@
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  Etcd:
+    image: 'bitnami/etcd:latest'
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes #无密码连接
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379 #给集群其他机器访问使用
+    ports:
+      - 2379:2379 # 客户端访问端口
+      - 2380:2380 # 机器间通信端口
+    networks:
+      - app-tier

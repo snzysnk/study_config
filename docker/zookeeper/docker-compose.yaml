@@ -1,0 +1,13 @@
+networks:
+  app-zk-tier:
+    driver: bridge
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - 2181:2181 # 客户端访问端口
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes # 允许匿名登录
+    networks:
+      - app-zk-tier
